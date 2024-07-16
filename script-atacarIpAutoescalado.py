@@ -18,7 +18,7 @@ def make_request(url):
         print(f"Error requesting {url}: {e}")
 
 # Número de solicitudes concurrentes
-num_requests = 500  
+num_requests = 300  
 
 # Ejecutar el bucle tres veces
 for _ in range(3):
