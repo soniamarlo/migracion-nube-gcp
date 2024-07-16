@@ -17,14 +17,14 @@ def make_request(url):
     except requests.exceptions.RequestException as e:
         print(f"Error requesting {url}: {e}")
 
-# Número de solicitudes concurrentes
-num_requests = 10  # Puedes ajustar este número según sea necesario
 
-# Utilizando ThreadPoolExecutor para realizar múltiples solicitudes en paralelo
+num_requests = 100  # Puedes ajustar este número según sea necesario
+
+
 with ThreadPoolExecutor(max_workers=num_requests) as executor:
     for _ in range(num_requests):
         executor.submit(make_request, url)
         time.sleep(0.2)  # Añadir un pequeño retraso entre las solicitudes
 
-# Esperar un momento para permitir que se completen todas las solicitudes
+
 time.sleep(5)  # Ajusta el tiempo según sea necesario
