@@ -17,7 +17,7 @@ def make_request(url):
     except requests.exceptions.RequestException as e:
         print(f"Error requesting {url}: {e}")
 
-num_requests = 50
+num_requests = 1000
 
 with ThreadPoolExecutor(max_workers=num_requests) as executor:
     futures = []
