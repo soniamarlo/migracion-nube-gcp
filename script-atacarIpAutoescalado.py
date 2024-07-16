@@ -17,21 +17,28 @@ def make_request(url):
     except requests.exceptions.RequestException as e:
         print(f"Error requesting {url}: {e}")
 
-num_requests = 1000
+# Número de solicitudes concurrentes
+num_requests = 500  
 
-with ThreadPoolExecutor(max_workers=num_requests) as executor:
-    futures = []
-    for _ in range(num_requests):
-        future = executor.submit(make_request, url)
-        futures.append(future)
-
+# Ejecutar el bucle tres veces
+for _ in range(3):
+    print(f"Ejecutando iteración {_ + 1}")
     
-    for future in as_completed(futures):
-        try:
-            future.result()
-        except Exception as e:
-            print(f"Exception during request: {e}")
+    # Utilizando ThreadPoolExecutor para realizar múltiples solicitudes en paralelo
+    with ThreadPoolExecutor(max_workers=num_requests) as executor:
+        futures = []
+        for _ in range(num_requests):
+            future = executor.submit(make_request, url)
+            futures.append(future)
 
+        # Esperar a que todas las solicitudes se completen
+        for future in as_completed(futures):
+            try:
+                future.result()
+            except Exception as e:
+                print(f"Exception during request: {e}")
 
-time.sleep(5) 
+    # Tiempo para permitir que se completen todas las solicitudes antes de la siguiente iteración
+    time.sleep(5)  
+ 
 
