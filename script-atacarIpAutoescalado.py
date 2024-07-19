@@ -18,10 +18,10 @@ def make_request(url):
         print(f"Error requesting {url}: {e}")
 
 # Número de solicitudes concurrentes
-num_requests = 300  
+num_requests = 600  
 
 # Ejecutar el bucle tres veces
-for _ in range(3):
+for _ in range(5):
     print(f"Ejecutando iteración {_ + 1}")
     
     # Utilizando ThreadPoolExecutor para realizar múltiples solicitudes en paralelo
