@@ -1,0 +1,25 @@
+
+# Instalar Python y dependencias
+apt-get update -y
+apt-get install -y python3 python3-pip wget
+systemctl daemon-reload
+
+
+
+# Directorio temporal para descargar el script
+TEMP_DIR="/tmp/script-inicial"
+
+# Crear directorio temporal
+mkdir -p $TEMP_DIR
+
+# Descargar el script de Python
+wget -O /tmp/script-inicial/script-atacarIpAutoescalado.py https://raw.githubusercontent.com/soniamarlo/migracion-nube-gcp/main/script-atacarIpAutoescalado.py
+
+
+# Ejecutar el script de Python con la IP de destino
+TARGET_IP="34.175.157.31"
+python3 $TEMP_DIR/script-atacarIpAutoescalado.py $TARGET_IP
+
+
+
+

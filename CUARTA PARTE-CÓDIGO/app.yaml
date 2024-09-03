@@ -1,0 +1,13 @@
+runtime: python39
+service: practica
+
+handlers:
+- url: /
+  script: main.app
+
+# [START gae_python_mysql_env]
+env_variables:
+    CLOUDSQL_CONNECTION_NAME: x-victor-428120-c7:europe-southwest1:tareafinal-db
+    CLOUDSQL_USER: alumno
+    CLOUDSQL_PASSWORD: googlecloud
+# [END gae_python_mysql_env]

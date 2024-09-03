@@ -1,0 +1,4 @@
+webapp2==3.0.0b1
+pytest==7.3.2
+webtest==3.0.0
+mysqlclient==2.1.0 
